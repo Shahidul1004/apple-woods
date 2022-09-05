@@ -1,0 +1,22 @@
+export enum homepageInfo {
+  imageSrc = "/homePageIcon1.png",
+  imageText_EN = "Ideal spaces to live a unique and different lifestyle",
+  imageText_ES = "Espacios ideales para vivir un estilo de vida único y diferente",
+  titleEN = "APPLE WOODS Smart Residential Complex",
+  titleES = "APPLE WOODS Complejo Residencial Inteligente",
+  info_01_EN = "APPLE WOODS is an attractive PARK STREET residential project, which will be developed in different stages, with the aim of creating one of the most ambitious and unique residential complexes in the city of Brownsville.",
+  info_01_ES = "APPLE WOODS es un atractivo proyecto residencial de PARK STREET, el cual se desarrollará en diferentes etapas, con el objetivo de crear uno de los complejos residenciales más ambiciosos y únicos en la ciudad de Brownsville.",
+  info_02_EN = "PARK STREET contemplates the general needs that will provide, technology, connectivity, green areas and common areas that invite coexistence with inhabitants and neighbors",
+  info_02_ES = "PARK STREET contempla necesidades generales que proveerán, tecnología, conectividad, áreas verdes y áreas comunes que invitan a la convivencia con habitantes y vecinos",
+
+  info_03_EN = "Your family is the most important thing to you, and with them in mind, PARK STREET designed Brownsville's first simple, safe, smart and orderly society. The project will be developed following an organized plan, APPLE WOODS has the best architecture firms in the city, with the aim of creating a different, unique, exclusive and harmonious environment.",
+  info_03_ES = "Su familia es lo más importante para usted, y nosotros pensando en ellos, PARK STREET diseñó la primer sociedad simple, segura, inteligente y ordenada de Brownsville. El proyecto será desarrollado siguiendo un plan organizado, APPLE WOODS cuenta con las mejores firmas de arquitectura de la ciudad, con el objetivo de crear un entorno diferente, único, exclusivo y armónico.",
+  info_04_EN = "It contemplates general needs that will provide, technology, connectivity, green and common areas that invite coexistence with inhabitants and neighbors.",
+  info_04_ES = "Contempla necesidades generales que proveerán, tecnología, conectividad, áreas verdes y comunes que inviten a la convivencia con habitantes y vecinos.",
+  info_05_EN = "Your family is the most important thing to you, and with them in mind, PARK STREET designed Brownsville's first simple, safe, smart and orderly society.",
+  info_05_ES = "Su familia es lo más importante para usted, y nosotros pensando en ellos, PARK STREET diseñó la primer sociedad simple, segura, inteligente y ordenada de Brownsville.",
+  info_06_EN = "APPLE WOODS combines a series of ideas to make our daily life simpler, with our services we solve situations that challenge us daily; In this way you will take care of the things that really matter to you, such as your family or your job, we take care of the rest.",
+  info_06_ES = "APPLE WOODS conjuga una serie de ideas para hacer nuestra vida cotidiana más simple, con nuestros servicios resolvemos situaciones que diariamente nos desafían; de esta manera usted se ocupará de las cosas que verdaderamente le importan como su familia o su trabajo, de lo demás nosotros nos encargamos.",
+  info_07_EN = "APPLE WOODS seeks to consolidate itself as a unique concept, for which part of the land will be allocated to green and pedestrian areas that invite coexistence between its inhabitants and neighbors.",
+  info_07_ES = "APPLE WOODS busca consolidarse como un concepto único, para lo cual se destinará parte del terreno a áreas verdes y peatonales que inviten a la convivencia entre sus habitantes y vecinos.",
+}

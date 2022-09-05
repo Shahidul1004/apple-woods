@@ -15,12 +15,19 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { MouseEventHandler, useContext, useRef, useState } from "react";
+import React, {
+  MouseEventHandler,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Context, langOptions } from "../../context";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const Navbar = (): JSX.Element => {
+  const [loading, setLoading] = useState<boolean>(true);
   const context = useContext(Context);
   const desktop = useMediaQuery("(min-width:1000px)");
   const mobile = useMediaQuery("(max-width:550px)");
@@ -52,133 +59,141 @@ const Navbar = (): JSX.Element => {
     setAnchorElMenu(null);
   };
 
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
   return (
     <>
-      <NavStyle>
-        {desktop && (
-          <NavContainerMD>
-            <Link href="/">
-              <Image
-                src="/logo.png"
-                alt="logo.png"
-                width="235px"
-                height="65px"
-                style={{ cursor: "pointer" }}
-              />
-            </Link>
-            <NavLinks>
+      {loading === false && (
+        <NavStyle desktop={desktop ? 1 : 0} mobile={mobile ? 1 : 0}>
+          {desktop && (
+            <NavContainerMD>
               <Link href="/">
-                <LinkItem
-                  active={router.pathname === "/" ? 1 : 0}
-                  desktop={desktop ? 1 : 0}
-                >
-                  {context.lang === langOptions.EN ? "HOME" : "INICIO"}
-                </LinkItem>
+                <Image
+                  src="/logo.png"
+                  alt="logo.png"
+                  width="235px"
+                  height="65px"
+                  style={{ cursor: "pointer" }}
+                />
               </Link>
-              <Link href="/location">
+              <NavLinks>
+                <Link href="/">
+                  <LinkItem
+                    active={router.pathname === "/" ? 1 : 0}
+                    desktop={desktop ? 1 : 0}
+                  >
+                    {context.lang === langOptions.EN ? "HOME" : "INICIO"}
+                  </LinkItem>
+                </Link>
+                <Link href="/location">
+                  <LinkItem
+                    active={router.pathname === "/location" ? 1 : 0}
+                    desktop={desktop ? 1 : 0}
+                  >
+                    {context.lang === langOptions.EN ? "LOCATION" : "UBICACION"}
+                  </LinkItem>
+                </Link>
+                <Link href="/residential">
+                  <LinkItem
+                    active={router.pathname === "/residential" ? 1 : 0}
+                    desktop={desktop ? 1 : 0}
+                  >
+                    {context.lang === langOptions.EN
+                      ? "RESIDENTIAL"
+                      : "RESIDENCIAL"}
+                  </LinkItem>
+                </Link>
+                <Link href="/houses">
+                  <LinkItem
+                    active={router.pathname === "/houses" ? 1 : 0}
+                    desktop={desktop ? 1 : 0}
+                  >
+                    {context.lang === langOptions.EN ? "HOUSES" : "CASAS"}
+                  </LinkItem>
+                </Link>
+                <Link href="/amenities">
+                  <LinkItem
+                    active={router.pathname === "/amenities" ? 1 : 0}
+                    desktop={desktop ? 1 : 0}
+                  >
+                    {context.lang === langOptions.EN
+                      ? "AMENITIES"
+                      : "AMENIDADES"}
+                  </LinkItem>
+                </Link>
                 <LinkItem
-                  active={router.pathname === "/location" ? 1 : 0}
+                  active={0}
                   desktop={desktop ? 1 : 0}
-                >
-                  {context.lang === langOptions.EN ? "LOCATION" : "UBICACION"}
-                </LinkItem>
-              </Link>
-              <Link href="/residential">
-                <LinkItem
-                  active={router.pathname === "/residential" ? 1 : 0}
-                  desktop={desktop ? 1 : 0}
-                >
-                  {context.lang === langOptions.EN
-                    ? "RESIDENTIAL"
-                    : "RESIDENCIAL"}
-                </LinkItem>
-              </Link>
-              <Link href="/houses">
-                <LinkItem
-                  active={router.pathname === "/houses" ? 1 : 0}
-                  desktop={desktop ? 1 : 0}
-                >
-                  {context.lang === langOptions.EN ? "HOUSES" : "CASAS"}
-                </LinkItem>
-              </Link>
-              <Link href="/amenities">
-                <LinkItem
-                  active={router.pathname === "/amenities" ? 1 : 0}
-                  desktop={desktop ? 1 : 0}
-                >
-                  {context.lang === langOptions.EN ? "AMENITIES" : "AMENIDADES"}
-                </LinkItem>
-              </Link>
-              {/* <Link href="/contact"> */}
-              <LinkItem
-                active={0}
-                desktop={desktop ? 1 : 0}
-                onClick={handleClickSupport}
-                onMouseEnter={handleClickSupport}
-                onMouseLeave={() => {
-                  setOnBtn(false);
-                }}
-              >
-                {context.lang === langOptions.EN ? "SUPPORT" : "SOPORTE"}
-              </LinkItem>
-              {/* </Link> */}
-              <Box
-                sx={{
-                  cursor: "pointer",
-                  marginLeft: "4px",
-                }}
-                onClick={() => {
-                  context.toggleLang();
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
+                  onClick={handleClickSupport}
+                  onMouseEnter={handleClickSupport}
+                  onMouseLeave={() => {
+                    setOnBtn(false);
                   }}
                 >
-                  <span
-                    className={
-                      context.lang === langOptions.EN ? "fi fi-gb" : "fi fi-es"
-                    }
-                    style={{ width: "15px", marginRight: "5px" }}
-                  ></span>
-                  <Typography
-                    fontSize="12px"
-                    marginTop="1px"
-                    fontWeight="400"
-                    letterSpacing=".7px"
+                  {context.lang === langOptions.EN ? "SUPPORT" : "SOPORTE"}
+                </LinkItem>
+                <Box
+                  sx={{
+                    cursor: "pointer",
+                    marginLeft: "4px",
+                  }}
+                  onClick={() => {
+                    context.toggleLang();
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                    }}
                   >
-                    {context.lang === langOptions.EN ? "EN" : "ES"}
-                  </Typography>
+                    <span
+                      className={
+                        context.lang === langOptions.EN
+                          ? "fi fi-gb"
+                          : "fi fi-es"
+                      }
+                      style={{ width: "15px", marginRight: "5px" }}
+                    ></span>
+                    <Typography
+                      fontSize="12px"
+                      marginTop="1px"
+                      fontWeight="400"
+                      letterSpacing=".7px"
+                    >
+                      {context.lang === langOptions.EN ? "EN" : "ES"}
+                    </Typography>
+                  </Box>
                 </Box>
-              </Box>
-            </NavLinks>
-          </NavContainerMD>
-        )}
-        {!desktop && (
-          <NavContainerSM>
-            <MenuIcon
-              fontSize={mobile ? "medium" : "large"}
-              sx={{
-                color: "gray",
-                cursor: "pointer",
-              }}
-              onClick={handleClickMenu}
-            />
-            <Link href="/">
-              <Image
-                src="/logo.png"
-                alt="logo.png"
-                width={mobile ? "128px" : "177px"}
-                height={mobile ? "36px" : "50px"}
-                style={{ cursor: "pointer" }}
+              </NavLinks>
+            </NavContainerMD>
+          )}
+          {!desktop && (
+            <NavContainerSM>
+              <MenuIcon
+                fontSize={mobile ? "medium" : "large"}
+                sx={{
+                  color: "gray",
+                  cursor: "pointer",
+                }}
+                onClick={handleClickMenu}
               />
-            </Link>
-          </NavContainerSM>
-        )}
-      </NavStyle>
+              <Link href="/">
+                <Image
+                  src="/logo.png"
+                  alt="logo.png"
+                  width={mobile ? "128px" : "177px"}
+                  height={mobile ? "36px" : "50px"}
+                  style={{ cursor: "pointer" }}
+                />
+              </Link>
+            </NavContainerSM>
+          )}
+        </NavStyle>
+      )}
 
       <Popper
         open={openSupport && desktop && (onBtn || onPopper)}
@@ -350,16 +365,21 @@ const Navbar = (): JSX.Element => {
 
 export default Navbar;
 
-const NavStyle = styled(Box)({
+interface NavProps extends BoxProps {
+  desktop: Number;
+  mobile: Number;
+}
+const NavStyle = styled(Box)<NavProps>(({ desktop, mobile }) => ({
   position: "fixed",
   top: 0,
   left: 0,
   width: "100vw",
-  height: "70px",
+  height: `${desktop ? "70px" : mobile ? "50px" : "60px"}`,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-});
+  backgroundColor: "white",
+}));
 
 const NavContainerMD = styled(Box)({
   width: "1000px",
