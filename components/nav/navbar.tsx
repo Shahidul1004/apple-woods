@@ -29,8 +29,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 const Navbar = (): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(true);
   const context = useContext(Context);
-  const desktop = useMediaQuery("(min-width:1000px)");
-  const mobile = useMediaQuery("(max-width:550px)");
+  const mobile = useMediaQuery("(max-width:600px)");
   const router = useRouter();
 
   const [onBtn, setOnBtn] = useState<boolean>(false);
@@ -66,137 +65,121 @@ const Navbar = (): JSX.Element => {
   return (
     <>
       {loading === false && (
-        <NavStyle desktop={desktop ? 1 : 0} mobile={mobile ? 1 : 0}>
-          {desktop && (
-            <NavContainerMD>
+        <NavStyle>
+          <NavContainerMD
+            sx={{
+              display: { xs: "none", md: "flex" },
+            }}
+          >
+            <Link href="/">
+              <Image
+                src="/logo.png"
+                alt="logo.png"
+                width="235px"
+                height="65px"
+                style={{ cursor: "pointer" }}
+              />
+            </Link>
+            <NavLinks>
               <Link href="/">
-                <Image
-                  src="/logo.png"
-                  alt="logo.png"
-                  width="235px"
-                  height="65px"
-                  style={{ cursor: "pointer" }}
-                />
-              </Link>
-              <NavLinks>
-                <Link href="/">
-                  <LinkItem
-                    active={router.pathname === "/" ? 1 : 0}
-                    desktop={desktop ? 1 : 0}
-                  >
-                    {context.lang === langOptions.EN ? "HOME" : "INICIO"}
-                  </LinkItem>
-                </Link>
-                <Link href="/location">
-                  <LinkItem
-                    active={router.pathname === "/location" ? 1 : 0}
-                    desktop={desktop ? 1 : 0}
-                  >
-                    {context.lang === langOptions.EN ? "LOCATION" : "UBICACION"}
-                  </LinkItem>
-                </Link>
-                <Link href="/residential">
-                  <LinkItem
-                    active={router.pathname === "/residential" ? 1 : 0}
-                    desktop={desktop ? 1 : 0}
-                  >
-                    {context.lang === langOptions.EN
-                      ? "RESIDENTIAL"
-                      : "RESIDENCIAL"}
-                  </LinkItem>
-                </Link>
-                <Link href="/houses">
-                  <LinkItem
-                    active={router.pathname === "/houses" ? 1 : 0}
-                    desktop={desktop ? 1 : 0}
-                  >
-                    {context.lang === langOptions.EN ? "HOUSES" : "CASAS"}
-                  </LinkItem>
-                </Link>
-                <Link href="/amenities">
-                  <LinkItem
-                    active={router.pathname === "/amenities" ? 1 : 0}
-                    desktop={desktop ? 1 : 0}
-                  >
-                    {context.lang === langOptions.EN
-                      ? "AMENITIES"
-                      : "AMENIDADES"}
-                  </LinkItem>
-                </Link>
-                <LinkItem
-                  active={0}
-                  desktop={desktop ? 1 : 0}
-                  onClick={handleClickSupport}
-                  onMouseEnter={handleClickSupport}
-                  onMouseLeave={() => {
-                    setOnBtn(false);
-                  }}
-                >
-                  {context.lang === langOptions.EN ? "SUPPORT" : "SOPORTE"}
+                <LinkItem active={router.pathname === "/" ? 1 : 0}>
+                  {context.lang === langOptions.EN ? "HOME" : "INICIO"}
                 </LinkItem>
+              </Link>
+              <Link href="/location">
+                <LinkItem active={router.pathname === "/location" ? 1 : 0}>
+                  {context.lang === langOptions.EN ? "LOCATION" : "UBICACION"}
+                </LinkItem>
+              </Link>
+              <Link href="/residential">
+                <LinkItem active={router.pathname === "/residential" ? 1 : 0}>
+                  {context.lang === langOptions.EN
+                    ? "RESIDENTIAL"
+                    : "RESIDENCIAL"}
+                </LinkItem>
+              </Link>
+              <Link href="/houses">
+                <LinkItem active={router.pathname === "/houses" ? 1 : 0}>
+                  {context.lang === langOptions.EN ? "HOUSES" : "CASAS"}
+                </LinkItem>
+              </Link>
+              <Link href="/amenities">
+                <LinkItem active={router.pathname === "/amenities" ? 1 : 0}>
+                  {context.lang === langOptions.EN ? "AMENITIES" : "AMENIDADES"}
+                </LinkItem>
+              </Link>
+              <LinkItem
+                onClick={handleClickSupport}
+                onMouseEnter={handleClickSupport}
+                onMouseLeave={() => {
+                  setOnBtn(false);
+                }}
+              >
+                {context.lang === langOptions.EN ? "SUPPORT" : "SOPORTE"}
+              </LinkItem>
+              <Box
+                sx={{
+                  cursor: "pointer",
+                  marginLeft: "4px",
+                }}
+                onClick={() => {
+                  context.toggleLang();
+                }}
+              >
                 <Box
                   sx={{
-                    cursor: "pointer",
-                    marginLeft: "4px",
-                  }}
-                  onClick={() => {
-                    context.toggleLang();
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
                   }}
                 >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                    }}
+                  <span
+                    className={
+                      context.lang === langOptions.EN ? "fi fi-gb" : "fi fi-es"
+                    }
+                    style={{ width: "15px", marginRight: "5px" }}
+                  ></span>
+                  <Typography
+                    fontSize="12px"
+                    marginTop="1px"
+                    fontWeight="400"
+                    letterSpacing=".7px"
                   >
-                    <span
-                      className={
-                        context.lang === langOptions.EN
-                          ? "fi fi-gb"
-                          : "fi fi-es"
-                      }
-                      style={{ width: "15px", marginRight: "5px" }}
-                    ></span>
-                    <Typography
-                      fontSize="12px"
-                      marginTop="1px"
-                      fontWeight="400"
-                      letterSpacing=".7px"
-                    >
-                      {context.lang === langOptions.EN ? "EN" : "ES"}
-                    </Typography>
-                  </Box>
+                    {context.lang === langOptions.EN ? "EN" : "ES"}
+                  </Typography>
                 </Box>
-              </NavLinks>
-            </NavContainerMD>
-          )}
-          {!desktop && (
-            <NavContainerSM>
-              <MenuIcon
-                fontSize={mobile ? "medium" : "large"}
-                sx={{
-                  color: "gray",
-                  cursor: "pointer",
-                }}
-                onClick={handleClickMenu}
+              </Box>
+            </NavLinks>
+          </NavContainerMD>
+
+          <NavContainerSM
+            sx={{
+              display: { xs: "flex", md: "none" },
+            }}
+          >
+            <MenuIcon
+              fontSize="medium"
+              sx={{
+                color: "gray",
+                cursor: "pointer",
+              }}
+              onClick={handleClickMenu}
+            />
+            <Link href="/">
+              <Image
+                src="/logo.png"
+                alt="logo.png"
+                width={mobile ? "128px" : "177px"}
+                height={mobile ? "36px" : "50px"}
+                style={{ cursor: "pointer" }}
               />
-              <Link href="/">
-                <Image
-                  src="/logo.png"
-                  alt="logo.png"
-                  width={mobile ? "128px" : "177px"}
-                  height={mobile ? "36px" : "50px"}
-                  style={{ cursor: "pointer" }}
-                />
-              </Link>
-            </NavContainerSM>
-          )}
+            </Link>
+          </NavContainerSM>
         </NavStyle>
       )}
 
       <Popper
-        open={openSupport && desktop && (onBtn || onPopper)}
+        open={openSupport && (onBtn || onPopper)}
         anchorEl={anchorElSupport}
         placement="bottom"
         transition
@@ -205,6 +188,9 @@ const Navbar = (): JSX.Element => {
         }}
         onMouseLeave={() => {
           setOnPopper(false);
+        }}
+        sx={{
+          display: { xs: "none", md: "block" },
         }}
       >
         {({ TransitionProps }) => (
@@ -219,10 +205,7 @@ const Navbar = (): JSX.Element => {
               }}
             >
               <Link href="/contact">
-                <LinkItem
-                  active={router.pathname === "/contact" ? 1 : 0}
-                  desktop={desktop ? 1 : 0}
-                >
+                <LinkItem active={router.pathname === "/contact" ? 1 : 0}>
                   {context.lang === langOptions.EN ? "CONTACT" : "CONTACTO"}
                 </LinkItem>
               </Link>
@@ -231,7 +214,7 @@ const Navbar = (): JSX.Element => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <LinkItem active={0} desktop={desktop ? 1 : 0}>
+                <LinkItem active={0}>
                   {context.lang === langOptions.EN
                     ? "PARK STREET"
                     : "PARK STREET"}
@@ -251,7 +234,7 @@ const Navbar = (): JSX.Element => {
           "aria-labelledby": "basic-button",
         }}
         sx={{
-          display: !desktop ? "block" : "none",
+          display: { xs: "block", md: "none" },
           ".MuiMenuItem-root": {
             minHeight: "30px",
           },
@@ -262,7 +245,7 @@ const Navbar = (): JSX.Element => {
             onClick={handleCloseMenu}
             selected={router.pathname === "/"}
           >
-            <LinkItem desktop={desktop ? 1 : 0} mobile={mobile ? 1 : 0}>
+            <LinkItem>
               {context.lang === langOptions.EN ? "HOME" : "INICIO"}
             </LinkItem>
           </MenuItem>
@@ -273,7 +256,7 @@ const Navbar = (): JSX.Element => {
             onClick={handleCloseMenu}
             selected={router.pathname === "/location"}
           >
-            <LinkItem desktop={desktop ? 1 : 0} mobile={mobile ? 1 : 0}>
+            <LinkItem>
               {context.lang === langOptions.EN ? "LOCATION" : "UBICACION"}
             </LinkItem>
           </MenuItem>
@@ -283,7 +266,7 @@ const Navbar = (): JSX.Element => {
             onClick={handleCloseMenu}
             selected={router.pathname === "/residential"}
           >
-            <LinkItem desktop={desktop ? 1 : 0} mobile={mobile ? 1 : 0}>
+            <LinkItem>
               {context.lang === langOptions.EN ? "RESIDENTIAL" : "RESIDENCIAL"}
             </LinkItem>
           </MenuItem>
@@ -294,7 +277,7 @@ const Navbar = (): JSX.Element => {
             onClick={handleCloseMenu}
             selected={router.pathname === "/houses"}
           >
-            <LinkItem desktop={desktop ? 1 : 0} mobile={mobile ? 1 : 0}>
+            <LinkItem>
               {context.lang === langOptions.EN ? "HOUSES" : "CASAS"}
             </LinkItem>
           </MenuItem>
@@ -305,7 +288,7 @@ const Navbar = (): JSX.Element => {
             onClick={handleCloseMenu}
             selected={router.pathname === "/amenities"}
           >
-            <LinkItem desktop={desktop ? 1 : 0} mobile={mobile ? 1 : 0}>
+            <LinkItem>
               {context.lang === langOptions.EN ? "AMENITIES" : "AMENIDADES"}
             </LinkItem>
           </MenuItem>
@@ -316,7 +299,7 @@ const Navbar = (): JSX.Element => {
             onClick={handleCloseMenu}
             selected={router.pathname === "/contact"}
           >
-            <LinkItem desktop={desktop ? 1 : 0} mobile={mobile ? 1 : 0}>
+            <LinkItem>
               {context.lang === langOptions.EN ? "CONTACT" : "CONTACTO"}
             </LinkItem>
           </MenuItem>
@@ -324,7 +307,7 @@ const Navbar = (): JSX.Element => {
 
         <MenuItem onClick={handleCloseMenu}>
           <a href="https://park-street.us/" target="_blank" rel="noreferrer">
-            <LinkItem active={0} desktop={desktop ? 1 : 0}>
+            <LinkItem>
               {context.lang === langOptions.EN ? "PARK STREET" : "PARK STREET"}
             </LinkItem>
           </a>
@@ -365,23 +348,27 @@ const Navbar = (): JSX.Element => {
 
 export default Navbar;
 
-interface NavProps extends BoxProps {
-  desktop: Number;
-  mobile: Number;
-}
-const NavStyle = styled(Box)<NavProps>(({ desktop, mobile }) => ({
+const NavStyle = styled(Box)(({ theme }) => ({
   position: "fixed",
   top: 0,
   left: 0,
   width: "100vw",
-  height: `${desktop ? "70px" : mobile ? "50px" : "60px"}`,
+  [theme.breakpoints.up("xs")]: {
+    height: "50px",
+  },
+  [theme.breakpoints.up("sm")]: {
+    height: "60px",
+  },
+  [theme.breakpoints.up("md")]: {
+    height: "70px",
+  },
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   backgroundColor: "white",
 }));
 
-const NavContainerMD = styled(Box)({
+const NavContainerMD = styled(Box)(({ theme }) => ({
   width: "1000px",
   height: "100%",
   margin: "0px 20px",
@@ -389,7 +376,7 @@ const NavContainerMD = styled(Box)({
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
-});
+}));
 
 const NavContainerSM = styled(Box)({
   width: "90%",
@@ -412,18 +399,37 @@ const NavLinks = styled(Box)({
 
 interface CustomBoxprops extends BoxProps {
   active?: Number;
-  mobile?: Number;
-  desktop: Number;
 }
-const LinkItem = styled(Box)<CustomBoxprops>(({ active, mobile, desktop }) => ({
-  padding: `${mobile ? "4px 7px" : desktop ? "8px 10px" : "4px 7px"}`,
-  backgroundColor: `${desktop ? (active ? "#98876e" : "#bcb5aa") : "none"}`,
-  color: `${desktop ? "white" : "#4A4A4A"}`,
+const LinkItem = styled(Box)<CustomBoxprops>(({ theme, active }) => ({
   cursor: "pointer",
   borderRadius: "4px",
-  fontSize: `${mobile ? "12px" : desktop ? "14px" : "13px"}`,
   fontWeight: "500",
-  ":hover": {
-    backgroundColor: `${desktop ? "#98876e" : "none"}`,
+
+  [theme.breakpoints.up("xs")]: {
+    padding: "4px 7px",
+    backgroundColor: "none",
+    color: "#4A4A4A",
+    fontSize: "12px",
+    ":hover": {
+      backgroundColor: "none",
+    },
+  },
+  [theme.breakpoints.up("sm")]: {
+    padding: "4px 7px",
+    backgroundColor: "none",
+    color: "#4A4A4A",
+    fontSize: "13px",
+    ":hover": {
+      backgroundColor: "none",
+    },
+  },
+  [theme.breakpoints.up("md")]: {
+    padding: "8px 10px",
+    backgroundColor: active ? "#98876e" : "#bcb5aa",
+    color: "white",
+    fontSize: "14px",
+    ":hover": {
+      backgroundColor: "#98876e",
+    },
   },
 }));

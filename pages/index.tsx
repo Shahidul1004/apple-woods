@@ -14,27 +14,24 @@ import Footer from "../components/nav/footer";
 import { Context, langOptions } from "../context";
 import { homepageInfo } from "../staticInfo/homeInfo";
 
-const Home: NextPage = () => {
+const Home: NextPage = (props: any) => {
   const [loading, setLoading] = useState<boolean>(true);
   const context = useContext(Context);
-  const desktop = useMediaQuery("(min-width:1000px)");
-  const mobile = useMediaQuery("(max-width:550px)");
 
   useEffect(() => {
     setLoading(false);
   }, []);
 
   return (
-    <>
+    <div>
       {loading === false && (
-        <HomePageStyle desktop={desktop ? 1 : 0} mobile={mobile ? 1 : 0}>
-          <ContainerStyle desktop={desktop ? 1 : 0} mobile={mobile ? 1 : 0}>
+        <HomePageStyle>
+          <ContainerStyle>
             <Image
               src={homepageInfo.imageSrc}
               alt={homepageInfo.imageSrc}
-              width="1000px"
-              height="325px"
-              layout="intrinsic"
+              width="980px"
+              height="320px"
             />
             <Box
               sx={{
@@ -59,15 +56,10 @@ const Home: NextPage = () => {
                   : homepageInfo.imageText_ES}
               </Typography>
             </Box>
-            <Title
-              style={{
-                fontSize: desktop ? "36px" : mobile ? "20px" : "25px",
-                marginTop: "15px",
-              }}
-            >
+            <Title>
               {context.lang === langOptions.EN
-                ? homepageInfo.titleEN
-                : homepageInfo.titleES}
+                ? props.title_EN
+                : props.title_ES}
             </Title>
             <Box
               sx={{
@@ -77,17 +69,11 @@ const Home: NextPage = () => {
                 alignItems: "center",
               }}
             >
-              <Text
-                sx={{
-                  width: { sx: "100%", sm: "50%" },
-                  padding: "0px 5px",
-                  fontSize: desktop ? "18px" : mobile ? "15px" : "17px",
-                }}
-              >
+              <TextSabon>
                 {context.lang === langOptions.EN
-                  ? homepageInfo.info_01_EN
-                  : homepageInfo.info_01_ES}
-              </Text>
+                  ? props.info_01_EN
+                  : props.info_01_ES}
+              </TextSabon>
 
               <Divider
                 sx={{
@@ -110,18 +96,11 @@ const Home: NextPage = () => {
                   border: "none",
                 }}
               />
-              <Text
-                sx={{
-                  width: { sx: "100%", sm: "50%" },
-                  padding: "10px 10px",
-                  backgroundColor: "#f7f4ef",
-                  fontSize: desktop ? "18px" : mobile ? "15px" : "17px",
-                }}
-              >
+              <TextSabon sx={{ backgroundColor: "#f7f4ef" }}>
                 {context.lang === langOptions.EN
-                  ? homepageInfo.info_02_EN
-                  : homepageInfo.info_02_ES}
-              </Text>
+                  ? props.info_02_EN
+                  : props.info_02_ES}
+              </TextSabon>
             </Box>
 
             <Divider
@@ -135,92 +114,89 @@ const Home: NextPage = () => {
               }}
             />
 
-            <Text
-              sx={{
-                padding: "0px 10px",
-                marginBottom: "5px",
-                fontSize: desktop ? "17px" : mobile ? "14px" : "16px",
-                fontFamily: "Roboto",
-              }}
-            >
+            <TextRoboto>
               {context.lang === langOptions.EN
-                ? homepageInfo.info_03_EN
-                : homepageInfo.info_03_ES}
-            </Text>
-            <Text
-              sx={{
-                padding: "0px 10px",
-                marginBottom: "5px",
-                fontSize: desktop ? "17px" : mobile ? "14px" : "16px",
-                fontFamily: "Roboto",
-              }}
-            >
+                ? props.info_03_EN
+                : props.info_03_ES}
+            </TextRoboto>
+            <TextRoboto>
               {context.lang === langOptions.EN
-                ? homepageInfo.info_04_EN
-                : homepageInfo.info_04_ES}
-            </Text>
-            <Text
-              sx={{
-                padding: "0px 10px",
-                marginBottom: "5px",
-                fontSize: desktop ? "17px" : mobile ? "14px" : "16px",
-                fontFamily: "Roboto",
-              }}
-            >
+                ? props.info_04_EN
+                : props.info_04_ES}
+            </TextRoboto>
+            <TextRoboto>
               {context.lang === langOptions.EN
-                ? homepageInfo.info_05_EN
-                : homepageInfo.info_05_ES}
-            </Text>
-            <Text
-              sx={{
-                padding: "0px 10px",
-                marginBottom: "5px",
-                fontSize: desktop ? "17px" : mobile ? "14px" : "16px",
-                fontFamily: "Roboto",
-              }}
-            >
+                ? props.info_05_EN
+                : props.info_05_ES}
+            </TextRoboto>
+            <TextRoboto>
               {context.lang === langOptions.EN
-                ? homepageInfo.info_06_EN
-                : homepageInfo.info_06_ES}
-            </Text>
-            <Text
+                ? props.info_06_EN
+                : props.info_06_ES}
+            </TextRoboto>
+            <TextRoboto
               sx={{
-                padding: "0px 10px",
                 marginBottom: { xs: "40px", sm: "75px" },
-                fontSize: desktop ? "17px" : mobile ? "14px" : "16px",
-                fontFamily: "Roboto",
               }}
             >
               {context.lang === langOptions.EN
-                ? homepageInfo.info_07_EN
-                : homepageInfo.info_07_ES}
-            </Text>
+                ? props.info_07_EN
+                : props.info_07_ES}
+            </TextRoboto>
             <Footer />
           </ContainerStyle>
         </HomePageStyle>
       )}
-    </>
+    </div>
   );
 };
 
 export default Home;
 
-interface CustomBoxProps extends BoxProps {
-  desktop: Number;
-  mobile: Number;
+export async function getStaticProps() {
+  const title_EN = homepageInfo.titleEN;
+  const title_ES = homepageInfo.titleES;
+  const info_01_EN = homepageInfo.info_01_EN;
+  const info_01_ES = homepageInfo.info_01_ES;
+  const info_02_EN = homepageInfo.info_02_EN;
+  const info_02_ES = homepageInfo.info_02_ES;
+  const info_03_EN = homepageInfo.info_03_EN;
+  const info_03_ES = homepageInfo.info_03_ES;
+  const info_04_EN = homepageInfo.info_04_EN;
+  const info_04_ES = homepageInfo.info_04_ES;
+  const info_05_EN = homepageInfo.info_05_EN;
+  const info_05_ES = homepageInfo.info_05_ES;
+  const info_06_EN = homepageInfo.info_06_EN;
+  const info_06_ES = homepageInfo.info_06_ES;
+  const info_07_EN = homepageInfo.info_07_EN;
+  const info_07_ES = homepageInfo.info_07_ES;
+
+  return {
+    props: {
+      title_EN,
+      title_ES,
+      info_01_EN,
+      info_01_ES,
+      info_02_EN,
+      info_02_ES,
+      info_03_EN,
+      info_03_ES,
+      info_04_EN,
+      info_04_ES,
+      info_05_EN,
+      info_05_ES,
+      info_06_EN,
+      info_06_ES,
+      info_07_EN,
+      info_07_ES,
+    },
+  };
 }
-const HomePageStyle = styled(Box)<CustomBoxProps>(({ mobile, desktop }) => ({
+
+const HomePageStyle = styled(Box)(({ theme }) => ({
   position: "absolute",
-  top: `${desktop ? "70px" : mobile ? "50px" : "60px"}`,
   left: "0px",
   width: "100vw",
-  height: `${
-    desktop
-      ? "calc(100vh - 70px)"
-      : mobile
-      ? "calc(100vh - 50px)"
-      : "calc(100vh - 60px)"
-  }`,
   display: "flex",
   flexDirection: "column",
   justifyContent: "flex-start",
@@ -228,34 +204,93 @@ const HomePageStyle = styled(Box)<CustomBoxProps>(({ mobile, desktop }) => ({
   backgroundColor: "white",
   boxSizing: "border-box",
   overflowX: "hidden",
+
+  [theme.breakpoints.up("xs")]: {
+    top: "50px",
+    height: "calc(100vh - 50px)",
+  },
+  [theme.breakpoints.up("sm")]: {
+    top: "60px",
+    height: "calc(100vh - 60px)",
+  },
+  [theme.breakpoints.up("md")]: {
+    top: "70px",
+    height: "calc(100vh - 70px)",
+  },
 }));
 
-const ContainerStyle = styled(Box)<CustomBoxProps>(({ desktop, mobile }) => ({
-  margin: `${
-    desktop
-      ? "10px 30px 0px 30px"
-      : mobile
-      ? "10px 15px 0px 15px"
-      : "10px 30px 0px 30px"
-  }`,
+const ContainerStyle = styled(Box)(({ theme }) => ({
   maxWidth: "1000px",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   gap: "15px",
   position: "relative",
+
+  [theme.breakpoints.up("xs")]: {
+    margin: "10px 15px 0px 15px",
+  },
+  [theme.breakpoints.up("sm")]: {
+    margin: "10px 30px 0px 30px",
+  },
+  [theme.breakpoints.up("md")]: {
+    margin: "10px 30px 0px 30px",
+  },
 }));
 
-const Title = styled(Typography)({
+const Title = styled(Typography)(({ theme }) => ({
   fontFamily: "sabon",
   color: "#b18441",
+  marginTop: "15px",
   textAlign: "center",
   textAlignLast: "center",
-});
+  [theme.breakpoints.up("xs")]: {
+    fontSize: "20px",
+  },
+  [theme.breakpoints.up("sm")]: {
+    fontSize: "25px",
+  },
+  [theme.breakpoints.up("md")]: {
+    fontSize: "36px",
+  },
+}));
 
-const Text = styled(Typography)({
+const TextSabon = styled(Typography)(({ theme }) => ({
   fontFamily: "sabon",
   color: "black",
   textAlign: "left",
   textAlignLast: "left",
-});
+  padding: "10px 10px",
+
+  [theme.breakpoints.up("xs")]: {
+    width: "100%",
+    fontSize: "15px",
+  },
+  [theme.breakpoints.up("sm")]: {
+    width: "50%",
+    fontSize: "17px",
+  },
+  [theme.breakpoints.up("md")]: {
+    width: "50%",
+    fontSize: "18px",
+  },
+}));
+
+const TextRoboto = styled(Typography)(({ theme }) => ({
+  fontFamily: "Roboto",
+  color: "black",
+  padding: "0px 10px",
+  marginBottom: "5px",
+  textAlign: "left",
+  textAlignLast: "left",
+
+  [theme.breakpoints.up("xs")]: {
+    fontSize: "14px",
+  },
+  [theme.breakpoints.up("sm")]: {
+    fontSize: "16px",
+  },
+  [theme.breakpoints.up("md")]: {
+    fontSize: "17px",
+  },
+}));
