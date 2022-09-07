@@ -54,8 +54,8 @@ const Location = (props: any): JSX.Element => {
             </Box>
             <Title sx={{ marginTop: "15px" }}>
               {context.lang === langOptions.EN
-                ? locationInfo.title_01_EN
-                : locationInfo.title_01_ES}
+                ? props.title_01_EN
+                : props.title_01_ES}
             </Title>
             <Box
               sx={{
@@ -67,8 +67,8 @@ const Location = (props: any): JSX.Element => {
             >
               <TextSabon>
                 {context.lang === langOptions.EN
-                  ? locationInfo.info_01_EN
-                  : locationInfo.info_01_ES}
+                  ? props.info_01_EN
+                  : props.info_01_ES}
               </TextSabon>
 
               <Divider
@@ -94,8 +94,8 @@ const Location = (props: any): JSX.Element => {
               />
               <TextSabon sx={{ backgroundColor: "#f7f4ef" }}>
                 {context.lang === langOptions.EN
-                  ? locationInfo.info_02_EN
-                  : locationInfo.info_02_ES}
+                  ? props.info_02_EN
+                  : props.info_02_ES}
               </TextSabon>
             </Box>
             <Image
@@ -168,37 +168,37 @@ const Location = (props: any): JSX.Element => {
                   }}
                 >
                   {context.lang === langOptions.EN
-                    ? locationInfo.info_03_title_EN
-                    : locationInfo.info_03_title_ES}
+                    ? props.info_03_title_EN
+                    : props.info_03_title_ES}
                 </TextRoboto>
                 <TextRoboto
                   sx={{ fontSize: { xs: "14px", sm: "15px", md: "17px" } }}
                 >
                   {context.lang === langOptions.EN
-                    ? locationInfo.info_03_point_01_EN
-                    : locationInfo.info_03_point_01_ES}
+                    ? props.info_03_point_01_EN
+                    : props.info_03_point_01_ES}
                 </TextRoboto>
 
                 <TextRoboto
                   sx={{ fontSize: { xs: "14px", sm: "14.5px", md: "17px" } }}
                 >
                   {context.lang === langOptions.EN
-                    ? locationInfo.info_03_point_02_EN
-                    : locationInfo.info_03_point_02_ES}
+                    ? props.info_03_point_02_EN
+                    : props.info_03_point_02_ES}
                 </TextRoboto>
                 <TextRoboto
                   sx={{ fontSize: { xs: "14px", sm: "15px", md: "17px" } }}
                 >
                   {context.lang === langOptions.EN
-                    ? locationInfo.info_03_point_03_EN
-                    : locationInfo.info_03_point_03_ES}
+                    ? props.info_03_point_03_EN
+                    : props.info_03_point_03_ES}
                 </TextRoboto>
                 <TextRoboto
                   sx={{ fontSize: { xs: "14px", sm: "15px", md: "17px" } }}
                 >
                   {context.lang === langOptions.EN
-                    ? locationInfo.info_03_point_04_EN
-                    : locationInfo.info_03_point_04_ES}
+                    ? props.info_03_point_04_EN
+                    : props.info_03_point_04_ES}
                 </TextRoboto>
               </Box>
             </Box>
@@ -216,8 +216,8 @@ const Location = (props: any): JSX.Element => {
 
             <Title>
               {context.lang === langOptions.EN
-                ? locationInfo.title_02_EN
-                : locationInfo.title_02_ES}
+                ? props.title_02_EN
+                : props.title_02_ES}
             </Title>
 
             <Box
@@ -239,8 +239,8 @@ const Location = (props: any): JSX.Element => {
               >
                 <TextSabon style={{ width: "100%" }}>
                   {context.lang === langOptions.EN
-                    ? locationInfo.info_04_EN
-                    : locationInfo.info_04_ES}
+                    ? props.info_04_EN
+                    : props.info_04_ES}
                 </TextSabon>
                 <Image
                   src={locationInfo.imageSrc_04}
@@ -275,8 +275,8 @@ const Location = (props: any): JSX.Element => {
                   }}
                 >
                   {context.lang === langOptions.EN
-                    ? locationInfo.info_05_EN
-                    : locationInfo.info_05_ES}
+                    ? props.info_05_EN
+                    : props.info_05_ES}
                 </TextSabon>
               </Box>
             </Box>
@@ -313,7 +313,7 @@ const Location = (props: any): JSX.Element => {
                 boxSizing: "border-box",
               }}
             >
-              {locationInfo_addresses.map((address) => (
+              {props.addresses.map((address: any) => (
                 <AddressCard
                   key={address.title}
                   name={address.title}

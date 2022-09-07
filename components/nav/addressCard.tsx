@@ -2,11 +2,11 @@ import { Box, styled, Typography } from "@mui/material";
 
 type props = {
   name: string;
-  descrip: String;
-  month: String;
-  addr?: String;
-  phone?: String;
-  link?: String;
+  descrip: string;
+  month: string;
+  addr?: string;
+  phone?: string;
+  link?: string;
 };
 
 const AddressCard = ({
