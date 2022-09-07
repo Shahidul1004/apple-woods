@@ -12,7 +12,7 @@ import {
 const Location = (props: any): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(true);
   const context = useContext(Context);
-  const mobile = useMediaQuery("(max-width:550px)");
+  const mobile = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
     setLoading(false);
